@@ -14,8 +14,6 @@ let topicsSelected = {};
 let totalQuestions = 0;
 let ques = [];
 let index = 1;
-let quesArray = [];
-let ansArray = [];
 
 /////////////////
 async function main() {
@@ -40,7 +38,7 @@ function addListnerToCheckboxes() {
     for (const checkbox of checkboxes) {
         checkbox.addEventListener('change', async function () {
             if (this.checked) {
-                topicsSelected[this.id] = 1;
+                topicsSelected[this.id] = totalQInDatabase[this.id];
             } else {
                 delete topicsSelected[this.id];
             }
@@ -70,16 +68,9 @@ function addListenerToGenerateQuestions() {
         } else if (totalQuestions < q) {
             slideNotification("Please select more topic.")
         } else {
-            // reinitialize the dictionary
 
             //get the questions, shuffle them
             ques = getQuestions();
-            for (const question of ques) {
-                createQuestionAnswerImageDOM(question);
-            }
-            console.log(quesArray);
-            console.log(ansArray);
-
 
             //add the questions
             var sceneID1 = document.createElement("div");
@@ -149,9 +140,9 @@ function putAppropriateQuestion() {
     setTimeout(() => {
         document.querySelector(".QNAQ_before").innerHTML = index + "/" + q;
         document.querySelector(".QNAQ").removeChild(document.querySelector(".QNAQ img"));
-        document.querySelector(".QNAQ").appendChild(quesArray[index]);
+        document.querySelector(".QNAQ").appendChild(ques[index]);
         document.querySelector(".QNAA").removeChild(document.querySelector(".QNAA img"));
-        document.querySelector(".QNAA").appendChild(ansArray[index]);
+        document.querySelector(".QNAA").appendChild(ques[index].replaceAll("Q","A"));
         document.querySelector(".QNAA_after").classList.remove("displayNone");
     }, 100);
 }
@@ -170,13 +161,4 @@ function slideNotification(message) {
     setTimeout(() => {
         notoficationPannel.parentNode.style.top = "-100%";
     }, 3000);
-}
-
-function createQuestionAnswerImageDOM(url) {
-    var img = new Image();
-    img.src = url;
-    quesArray.push(img);
-    img = new Image();
-    img.src = url.replaceAll('Q', 'A');
-    ansArray.push(img);
 }
