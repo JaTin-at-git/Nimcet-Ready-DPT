@@ -1,0 +1,241 @@
+:root {
+    --x: 0deg;
+}
+
+body {
+    border: none;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: 16px;
+    position: relative;
+    min-height: fit-content;
+    overflow-x: hidden;
+    margin: 0 0 50px;
+}
+
+.notificationDiv {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition-property: top;
+    transition-duration: .3s;
+    z-index: 100;
+}
+
+.notificationID1 {
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: #CA2D2F;
+    color: white;
+    padding: .5rem 2rem;
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.heading h1 {
+    font-size: 3rem;
+    position: relative;
+    margin-bottom: 0;
+    text-align: center;
+
+}
+
+.heading h1 span {
+    color: #01486b;
+}
+
+.heading h1::after {
+    content: '';
+    display: block;
+    width: 10%;
+    height: 3px;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: black;
+    animation: underline 2s 1;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+}
+
+@keyframes underline {
+    to {
+        width: 100%;
+    }
+
+}
+
+/*////////////////topicSelection///////////////*/
+.topicsSelection {
+    padding: 2rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.topicSelectionID1 {
+    max-width: 1000px;
+}
+
+.topicsCheckboxes * {
+    user-select: none;
+}
+
+
+.topicInput {
+    display: inline-block;
+    width: 300px;
+}
+
+.quantityDiv {
+    margin: 2rem 0 1rem;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+}
+
+.getQuestionsDiv {
+    margin: 0 1rem 1rem;
+    max-width: 1000px;
+    text-align: center;
+}
+
+#getQuestionsButton {
+    border: 1px solid #075c88;
+    padding: .5rem;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    background-color: #075c88;
+    user-select: none;
+    display: block;
+    min-width: fit-content;
+    margin: 0 1rem 10px;
+}
+
+
+#getQuestionsButton:active, .buttonNext:active, .buttonPrevious:active {
+    transform: scale(.99);
+}
+
+
+/*//////////////////*/
+
+/*//////////////////////*/
+.me {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translatex(-50%);
+}
+
+.me span {
+    display: block;
+    color: #01486b;
+    font-weight: bold;
+}
+
+
+.scene {
+    max-width: 1000px;
+    min-width: 100vw;
+    display: flex;
+    justify-content: center;
+    background-color: #f3f3f3;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.sceneID1 {
+    max-width: 1000px;
+    position: relative;
+}
+
+.sceneQNA {
+}
+
+.QNAQ, .QNAA {
+    padding: 3px;
+    /*background-color: red;*/
+    height: 45vh;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 3px;
+    background-color: white;
+    position: relative;
+    overflow-y: scroll;
+}
+
+.QNAQ_before {
+    position: absolute;
+    top: 10px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 100%;
+    padding: 5px;
+}
+
+.QNAA_after {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    content: "Click to Display Answer";
+    color: grey;
+    text-align: center;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    background: rgb(255 255 255 / 80%);
+    backdrop-filter: saturate(180%) blur(10px);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.displayNone {
+    display: none
+}
+
+
+.QNAA {
+    /*background-color: green;*/
+    align-items: flex-start;
+}
+
+.QNAQ img, .QNAA img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.buttonNext, .buttonPrevious {
+    position: absolute;
+    bottom: 10px;
+    padding: 10px 15px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 7px;
+    user-select: none;
+}
+
+.buttonNext {
+    right: 20px;
+}
+
+.buttonPrevious {
+    left: 20px;
+}

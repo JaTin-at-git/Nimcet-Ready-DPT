@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tests</title>
+</head>
+
+<style>
+    :root {
+        --i: 0;
+    }
+
+
+    .scene {
+        max-width: 1000px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 800px;
+    }
+
+    .scene .card {
+        width: 240px;
+        height: 300px;
+        color: white;
+        cursor: pointer;
+        transition: 1s ease-in-out;
+        transform-style: preserve-3d;
+        position: absolute;
+        transform: rotateY(-103deg) translateZ(calc(-200px - var(--i)*1px)) translateX(-100px);
+        z-index: calc(0 - var(--i));
+    }
+
+    .scene .card:first-of-type {
+        z-index: 5;
+        transform: rotateY(0);
+    }
+
+    /*.scene .card:hover {*/
+    /*    transform: rotateY(0.5turn);*/
+    /*}*/
+
+    .scene .card .card__face {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transition: 1s ease-in-out;
+        -webkit-box-reflect: below 0 linear-gradient(transparent 83%, #00000024);
+    }
+
+    .scene .card .card__face img {
+        width: 240px;
+        height: 300px;
+        -o-object-fit: cover;
+        object-fit: cover;
+    }
+
+    .scene .card .card__face--back {
+        transform: rotateY(0.5turn);
+    }
+
+    .card .buttons {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+    }
+
+    .card .q, .card .a {
+        width: 100%;
+        height: 100%;
+        background-color: darkgoldenrod;
+        box-sizing: border-box;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        overflow: scroll;
+    }
+
+    .card .q::-webkit-scrollbar, .card .a::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .card:after {
+        background-color: #a37131;
+        background-image: -webkit-linear-gradient(hsla(0, 0%, 100%, .25), hsla(0, 0%, 0%, .25));
+        bottom: 0;
+        content: '';
+        right: 0px;
+        position: absolute;
+        top: 0;
+        width: 3px;
+        z-index: -10;
+        -webkit-transform: rotateY(-90deg);
+        -webkit-transform-origin: 100% 50%;
+    }
+
+    .card:before {
+        background-color: #a37131;
+        background-image: -webkit-linear-gradient(hsla(0, 0%, 100%, .25), hsla(0, 0%, 0%, .25));
+        content: '';
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 3px;
+        -webkit-transform: translateZ(-5px);
+    }
+
+</style>
+
+<body>
+
+<div class="scene">
+    <div class="card" style="--i: 0">
+        <div class="card__face card__face--front">
+            <div class="q"><p>This is supposed to be a question</p></div>
+            <!--            <img src="https://i.loli.net/2019/11/23/cnKl1Ykd5rZCVwm.jpg"/>-->
+            <div class="buttons">
+                <div class="prev">previous</div>
+                <div class="showAns">show answer</div>
+            </div>
+
+        </div>
+        <div class="card__face card__face--back">
+            <img src="https://i.loli.net/2019/11/16/cqyJiYlRwnTeHmj.jpg"/>
+            <div class="buttons">
+                <div class="showQues">show Question</div>
+                <div class="next">next</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="card" style="--i: 4">
+        <div class="card__face card__face--front">
+            <img src="https://i.loli.net/2019/11/16/FLnzi5Kq4tkRZSm.jpg"/>
+        </div>
+        <div class="card__face card__face--back">
+            <img src="https://i.loli.net/2019/10/18/buDT4YS6zUMfHst.jpg"/>
+        </div>
+    </div>
+    <div class="card" style="--i: 8">
+        <div class="card__face card__face--front">
+            <img src="https://i.loli.net/2019/10/18/uXF1Kx7lzELB6wf.jpg"/>
+        </div>
+        <div class="card__face card__face--back">
+            <img src="https://i.loli.net/2019/11/03/RtVq2wxQYySDb8L.jpg"/>
+        </div>
+    </div>
+</div>
+
+<script !src="">
+    for (const showAns of document.querySelectorAll(".card .showAns")) {
+        showAns.addEventListener('click', () => {
+            showAns.offsetParent.offsetParent.style.transform = "rotateY(0.5turn)";
+        });
+    }
+</script>
+
+</body>
+</html>
