@@ -68,6 +68,8 @@ function addListenerToGenerateQuestions() {
         } else if (totalQuestions < q) {
             slideNotification("Please select more topic.")
         } else {
+            //clear the previous questions
+            document.querySelector(".scene").innerHTML = "";
 
             //get the questions, shuffle them
             ques = getQuestions();
@@ -128,7 +130,7 @@ function addFunctionalityToNextButton() {
 function addFunctionalityToPreviousButton() {
     document.querySelector(".buttonPrevious").addEventListener('click', () => {
         index--;
-        if (index <= 1) {
+        if (index <= 0) {
             slideNotification("Move Ahead!");
             return;
         }
@@ -139,10 +141,8 @@ function addFunctionalityToPreviousButton() {
 function putAppropriateQuestion() {
     setTimeout(() => {
         document.querySelector(".QNAQ_before").innerHTML = index + "/" + q;
-        document.querySelector(".QNAQ").removeChild(document.querySelector(".QNAQ img"));
-        document.querySelector(".QNAQ").appendChild(ques[index]);
-        document.querySelector(".QNAA").removeChild(document.querySelector(".QNAA img"));
-        document.querySelector(".QNAA").appendChild(ques[index].replaceAll("Q","A"));
+        document.querySelector(".QNAQ img").setAttribute('src', ques[index]);
+        document.querySelector(".QNAA img").setAttribute('src', ques[index].replaceAll("Q", "A"));
         document.querySelector(".QNAA_after").classList.remove("displayNone");
     }, 100);
 }
