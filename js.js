@@ -4,6 +4,11 @@ let notoficationPannel = document.querySelector("#warning");
 let checkboxes = document.querySelectorAll("input[type='checkbox']");
 let generateQuestionsButton = document.querySelector("#getQuestionsButton");
 
+let totalQInDatabase = {
+    "circle": 42,
+    "straightLines": 34
+};
+
 let q = 0;
 let topicsSelected = {};
 let totalQuestions = 0;
@@ -21,65 +26,10 @@ async function main() {
 
 main();
 
-//instead of checking for each image, check for (say) image 10,
-//if img 10 present, check for 20th image
-//if 10th image is not present, check for 5th image
-//if 5th is not present check for 2nd image
-//if 2nd image is not present check for 1st image
-//if 1st image is not present check for 0th image
-async function getTotalQuestionsOfThisTopic2(topic) {
-    return await new Promise(function (resolve) {
-        //just for loading animation
-        selectedQ.innerHTML = "&nbsp;" + q.toString() + `/ <img style="width: 20px; display: inline-block" src='200w.webp'>`;
-
-
-        var i = 10;
-        var gap = 10;
-        var limitAchieved = false;
-        var test = document.querySelector(".test"); // this is a DOM div
-        var timeout = 100; //timeout for setTimeoutFunction
-        repeat(i);
-
-        function repeat(i) {
-            console.log("i: " + i);
-            var img = document.createElement("img");
-            img.setAttribute('alt', 'test image');
-            img.setAttribute("src", "images/" + topic + "/Q/" + topic + "Q (" + i + ").jpg");
-            test.appendChild(img);
-            setTimeout(() => {
-                console.log("Height is: " + document.querySelector(".test img").clientHeight);
-                if (document.querySelector(".test img").clientHeight > 40) {
-                    setTimeout(() => {
-                        console.log("image " + i + " present.")
-                        if (gap === 1) {
-                            test.removeChild(img);
-                            topicsSelected[topic] = i;
-                            resolve(i);
-                            //it ends here
-                        } else {
-                            test.removeChild(img);
-                            gap = limitAchieved ? Math.floor(gap / 2) : gap;
-                            repeat(i += gap);
-                        }
-                    }, timeout);
-                } else {
-                    console.log("image " + i + " NOT present.")
-                    test.removeChild(img);
-                    limitAchieved = true;
-                    gap = Math.floor(gap / 2);
-                    repeat(i -= gap);
-                }
-            }, timeout)
-        }
-
-    });
-}
-
-async function getMaxQuestions(topicsSelected) {
+function getMaxQuestions(topicsSelected) {
+    totalQuestions = 0;
     for (const [topic] of Object.entries(topicsSelected)) {
-        await getTotalQuestionsOfThisTopic2(topic).then(value => {
-            totalQuestions += value;
-        });
+        totalQuestions += totalQInDatabase[topic];
     }
     return totalQuestions;
 }
@@ -95,7 +45,7 @@ function addListnerToCheckboxes() {
                 delete topicsSelected[this.id];
             }
             q = Object.keys(topicsSelected).length;
-            var maxQs = await getMaxQuestions(topicsSelected);
+            var maxQs = getMaxQuestions(topicsSelected);
             xInput.setAttribute("min", q.toString());
             xInput.setAttribute("max", maxQs.toString());
             xInput.setAttribute("value", q.toString());
@@ -187,7 +137,7 @@ function addFunctionalityToNextButton() {
 function addFunctionalityToPreviousButton() {
     document.querySelector(".buttonPrevious").addEventListener('click', () => {
         index--;
-        if (index <= 0) {
+        if (index <= 1) {
             slideNotification("Move Ahead!");
             return;
         }
