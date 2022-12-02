@@ -222,6 +222,11 @@ body {
     object-fit: contain;
 }
 
+.QNAA img{
+    margin-bottom: 2rem;
+}
+
+
 .buttonNext, .buttonPrevious {
     position: absolute;
     bottom: 10px;

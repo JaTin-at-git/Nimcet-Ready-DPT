@@ -6,7 +6,8 @@ let generateQuestionsButton = document.querySelector("#getQuestionsButton");
 
 let totalQInDatabase = {
     "circle": 42,
-    "straightLines": 34
+    "straightLines": 34,
+    "parabola": 37
 };
 
 let q = 0;
@@ -119,7 +120,7 @@ function getQuestions() {
 function addFunctionalityToNextButton() {
     document.querySelector(".buttonNext").addEventListener('click', () => {
         index++;
-        if (index >= q) {
+        if (index > q) {
             slideNotification("That's All");
             return;
         }
