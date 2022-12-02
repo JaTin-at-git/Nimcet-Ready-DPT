@@ -14,7 +14,7 @@ let q = 0;
 let topicsSelected = {};
 let totalQuestions = 0;
 let ques = [];
-let index = 1;
+let index = 0;
 
 /////////////////
 async function main() {
@@ -81,7 +81,7 @@ function addListenerToGenerateQuestions() {
             sceneID1.innerHTML = `
         <div class="sceneQNA">
             <div class="QNAQ">
-                <div class="QNAQ_before">` + index + `/` + q + `</div>
+                <div class="QNAQ_before">` + (index + 1) + `/` + q + `</div>
                 <img src="` + ques[0] + `" >
             </div>
             <div class="QNAA">
@@ -96,6 +96,7 @@ function addListenerToGenerateQuestions() {
             addFunctionalityToNextButton();
             addFunctionalityToPreviousButton();
             addFunctionalityToRevealAnswer();
+            preloadNextQNA();
         }
     });
 }
@@ -120,7 +121,8 @@ function getQuestions() {
 function addFunctionalityToNextButton() {
     document.querySelector(".buttonNext").addEventListener('click', () => {
         index++;
-        if (index > q) {
+        if (index >= q) {
+            index = q - 1;
             slideNotification("That's All");
             return;
         }
@@ -131,7 +133,8 @@ function addFunctionalityToNextButton() {
 function addFunctionalityToPreviousButton() {
     document.querySelector(".buttonPrevious").addEventListener('click', () => {
         index--;
-        if (index <= 0) {
+        if (index < 0) {
+            index = 0;
             slideNotification("Move Ahead!");
             return;
         }
@@ -140,12 +143,12 @@ function addFunctionalityToPreviousButton() {
 }
 
 function putAppropriateQuestion() {
-    setTimeout(() => {
-        document.querySelector(".QNAQ_before").innerHTML = index + "/" + q;
-        document.querySelector(".QNAQ img").setAttribute('src', ques[index]);
-        document.querySelector(".QNAA img").setAttribute('src', ques[index].replaceAll("Q", "A"));
-        document.querySelector(".QNAA_after").classList.remove("displayNone");
-    }, 100);
+    console.log("index: " + index);
+    document.querySelector(".QNAQ_before").innerHTML = (index + 1) + "/" + q;
+    document.querySelector(".QNAQ img").setAttribute('src', ques[index]);
+    document.querySelector(".QNAA img").setAttribute('src', ques[index].replaceAll("Q", "A"));
+    document.querySelector(".QNAA_after").classList.remove("displayNone");
+    preloadNextQNA();
 }
 
 function addFunctionalityToRevealAnswer() {
@@ -154,6 +157,16 @@ function addFunctionalityToRevealAnswer() {
     });
 }
 
+function preloadNextQNA() {
+    try {
+        var imgQ = new Image();
+        imgQ.src = ques[index + 1];
+        var imgA = new Image();
+        imgA.src = ques[index + 1].replaceAll('Q', 'A');
+    } catch (e) {
+        //pass
+    }
+}
 
 ///utility
 function slideNotification(message) {

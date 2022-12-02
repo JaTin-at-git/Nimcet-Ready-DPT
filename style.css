@@ -159,6 +159,7 @@ body {
     background-color: #f3f3f3;
     box-sizing: border-box;
     height: 100%;
+    margin-bottom: 2rem;
 }
 
 .sceneID1 {
@@ -200,7 +201,7 @@ body {
     box-sizing: border-box;
     height: 100%;
     width: 100%;
-    background: rgb(255 255 255 / 80%);
+    background: rgb(255 255 255 / 25%);
     backdrop-filter: saturate(180%) blur(10px);
     position: absolute;
     top: 0;
@@ -243,4 +244,8 @@ body {
 
 .buttonPrevious {
     left: 20px;
+}
+
+.scene *{
+    user-select: none;
 }
