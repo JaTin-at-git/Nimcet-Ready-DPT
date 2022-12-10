@@ -7,7 +7,8 @@ let generateQuestionsButton = document.querySelector("#getQuestionsButton");
 let totalQInDatabase = {
     "circle": 42,
     "straightLines": 34,
-    "parabola": 37
+    "parabola": 37,
+    "ellipseHyperbola": 53
 };
 
 let q = 0;
