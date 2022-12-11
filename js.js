@@ -8,7 +8,8 @@ let totalQInDatabase = {
     "circle": 42,
     "straightLines": 34,
     "parabola": 37,
-    "ellipseHyperbola": 53
+    "ellipseHyperbola": 53,
+    "vector": 62
 };
 
 let q = 0;
